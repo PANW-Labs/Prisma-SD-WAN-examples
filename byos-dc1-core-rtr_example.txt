@@ -1,0 +1,56 @@
+set interfaces ethernet eth0 address 'dhcp'
+set interfaces ethernet eth0 description 'Mgmt'
+
+set interfaces ethernet eth1 address '192.168.101.1/24'
+set interfaces ethernet eth1 description 'TGEN Network'
+
+set interfaces ethernet eth2 address '192.168.102.1/24'
+set interfaces ethernet eth2 description 'ION Core Peerings'
+
+set interfaces ethernet eth3 address '192.168.100.1/24'
+set interfaces ethernet eth3 description 'ION Ctrl'
+
+set interfaces ethernet eth4 address 'dhcp'
+set interfaces ethernet eth4 description 'Inet direct'
+
+set interfaces ethernet eth5 address '192.168.103.1/30'
+set interfaces ethernet eth5 description 'DCI'
+
+set interfaces loopback lo
+set nat source rule 100 outbound-interface 'eth4'
+set nat source rule 100 translation address 'masquerade'
+set protocols bgp address-family ipv4-unicast network 192.168.100.0/24
+set protocols bgp address-family ipv4-unicast network 192.168.101.0/24
+set protocols bgp address-family ipv4-unicast network 192.168.102.0/24
+set protocols bgp address-family ipv4-unicast network 192.168.103.0/30
+set protocols bgp local-as '65100'
+set protocols bgp neighbor 192.168.102.10 address-family ipv4-unicast
+set protocols bgp neighbor 192.168.102.10 remote-as '65101'
+set protocols bgp neighbor 192.168.102.11 address-family ipv4-unicast
+set protocols bgp neighbor 192.168.102.11 remote-as '65101'
+set protocols static route 0.0.0.0/0 next-hop 192.168.1.1
+set service dhcp-server shared-network-name ION-Ctrl subnet 192.168.100.0/24 default-router '192.168.100.1'
+set service dhcp-server shared-network-name ION-Ctrl subnet 192.168.100.0/24 name-server '1.1.1.1'
+set service dhcp-server shared-network-name ION-Ctrl subnet 192.168.100.0/24 range 0 start '192.168.100.10'
+set service dhcp-server shared-network-name ION-Ctrl subnet 192.168.100.0/24 range 0 stop '192.168.100.20'
+set service dhcp-server shared-network-name TGEN subnet 192.168.101.0/24 default-router '192.168.101.1'
+set service dhcp-server shared-network-name TGEN subnet 192.168.101.0/24 name-server '1.1.1.1'
+set service dhcp-server shared-network-name TGEN subnet 192.168.101.0/24 range 0 start '192.168.101.10'
+set service dhcp-server shared-network-name TGEN subnet 192.168.101.0/24 range 0 stop '192.168.101.20'
+set service dhcp-server shared-network-name Core-Peer subnet 192.168.102.0/24 default-router '192.168.102.1'
+set service dhcp-server shared-network-name Core-Peer subnet 192.168.102.0/24 name-server '1.1.1.1'
+set service dhcp-server shared-network-name Core-Peer subnet 192.168.102.0/24 range 0 start '192.168.102.10'
+set service dhcp-server shared-network-name Core-Peer subnet 192.168.102.0/24 range 0 stop '192.168.102.20'
+
+set service https api
+set service ssh port '22'
+set system config-management commit-revisions '100'
+set system conntrack modules ftp
+set system conntrack modules h323
+set system conntrack modules nfs
+set system conntrack modules pptp
+set system conntrack modules sip
+set system conntrack modules sqlnet
+set system conntrack modules tftp
+set system console device ttyS0 speed '115200'
+set system host-name 'DC1-CoreRtr'
