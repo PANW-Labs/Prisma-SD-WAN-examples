@@ -1,0 +1,529 @@
+{
+    "name": "DC-1",
+    "requirements": [
+        {
+            "verify": "exists_in_sandbox",
+            "resource_type": "service",
+            "name": "Mgmt-Network",
+            "model": ""
+        },
+        {
+            "verify": "exists_in_sandbox",
+            "resource_type": "service",
+            "name": "Egress-Network",
+            "model": ""
+        },
+        {
+            "use_existing": true,
+            "verify": "resource_name_exists",
+            "resource_type": "resource",
+            "name": "Domain-controller",
+            "model": ""
+        }
+    ],
+    "resources_to_add": [],
+    "apps_to_add": [
+        {
+            "use_existing": false,
+            "friendly_name": "app1",
+            "visible_name": "DC1-Responder-SRV-TGEN-PSDWAN",
+            "template_name": "DC-Responder-SRV-TGEN-PSDWAN",
+            "attribute_name": "Tag",
+            "attribute_value": "DC1-Responder",
+            "default_deploy_path": "NAM-1"
+        },
+        {
+            "use_existing": false,
+            "friendly_name": "app2",
+            "visible_name": "DC1-Core-Router",
+            "template_name": "VYOS-Router",
+            "attribute_name": "Tag",
+            "attribute_value": "DC1-Router",
+            "default_deploy_path": "NAM-1"
+        },
+        {
+            "use_existing": false,
+            "friendly_name": "app3",
+            "visible_name": "DC1-ION-v3104-PSDWAN-1",
+            "template_name": "ION-v3104-PSDWAN",
+            "attribute_name": "Tag",
+            "attribute_value": "DC1-Ion-1",
+            "default_deploy_path": "NAM-1"
+        },
+        {
+            "use_existing": false,
+            "friendly_name": "app4",
+            "visible_name": "DC1-ION-v3104-PSDWAN-2",
+            "template_name": "ION-v3104-PSDWAN",
+            "attribute_name": "Tag",
+            "attribute_value": "DC1-Ion-2",
+            "default_deploy_path": "NAM-1"
+        },
+        {
+            "use_existing": true,
+            "friendly_name": "app5",
+            "visible_name": "BYOS-VYOS-ISP",
+            "template_name": "VYOS-Router",
+            "attribute_name": "Tag",
+            "attribute_value": "BYOS-VYOS-ISP",
+            "default_deploy_path": "NAM-1"
+        },
+        {
+            "use_existing": true,
+            "friendly_name": "app6",
+            "visible_name": "BYOS-VYOS-MPLS",
+            "template_name": "VYOS-Router",
+            "attribute_name": "Tag",
+            "attribute_value": "BYOS-VYOS-MPLS",
+            "default_deploy_path": "NAM-1"
+        }
+    ],
+    "services_to_add": [
+        {
+            "service_name": "VLAN Auto",
+            "friendly_names": [
+                "vlan1",
+                "vlan2",
+                "vlan3",
+                "vlan4",
+                "vlan5"
+            ]
+        },
+        {
+            "service_name": "VLAN Auto",
+            "use_existing": true,
+            "friendly_name": "vlan6",
+            "name": "DC-VLAN"
+        }
+    ],
+    "connections_to_add": [
+        {
+            "src": {
+                "new": true,
+                "verify": "",
+                "name": "app1",
+                "model": "",
+                "vnic": "1"
+            },
+            "dest": {
+                "new": false,
+                "verify": "resource_name_exists",
+                "resource_type": "service",
+                "name": "Mgmt-Network",
+                "model": ""
+            }
+        },
+        {
+            "src": {
+                "new": true,
+                "verify": "",
+                "name": "app1",
+                "model": "",
+                "vnic": "2"
+            },
+            "dest": {
+                "new": true,
+                "verify": "",
+                "name": "vlan1",
+                "model": "",
+                "vnic": ""
+            }
+        },
+        {
+            "src": {
+                "new": true,
+                "verify": "",
+                "name": "app2",
+                "model": "",
+                "vnic": "2"
+            },
+            "dest": {
+                "new": true,
+                "verify": "",
+                "name": "vlan1",
+                "model": "",
+                "vnic": ""
+            }
+        },
+        {
+            "src": {
+                "new": true,
+                "verify": "",
+                "name": "app2",
+                "model": "",
+                "vnic": "4"
+            },
+            "dest": {
+                "new": true,
+                "verify": "",
+                "name": "vlan2",
+                "model": "",
+                "vnic": ""
+            }
+        },
+        {
+            "src": {
+                "new": true,
+                "verify": "",
+                "name": "app2",
+                "model": "",
+                "vnic": "3"
+            },
+            "dest": {
+                "new": true,
+                "verify": "",
+                "name": "vlan3",
+                "model": "",
+                "vnic": ""
+            }
+        },
+        {
+            "src": {
+                "new": true,
+                "verify": "",
+                "name": "app2",
+                "model": "",
+                "vnic": "1"
+            },
+            "dest": {
+                "new": false,
+                "verify": "resource_name_exists",
+                "resource_type": "service",
+                "name": "Mgmt-Network",
+                "model": ""
+            }
+        },
+        {
+            "src": {
+                "new": true,
+                "verify": "",
+                "name": "app2",
+                "model": "",
+                "vnic": "5"
+            },
+            "dest": {
+                "new": false,
+                "verify": "resource_name_exists",
+                "resource_type": "service",
+                "name": "Egress-Network",
+                "model": ""
+            }
+        },
+        {
+            "src": {
+                "new": true,
+                "verify": "",
+                "name": "app2",
+                "model": "",
+                "vnic": "6"
+            },
+            "dest": {
+                "new": true,
+                "verify": "",
+                "name": "vlan6",
+                "model": "",
+                "vnic": ""
+            }
+        },
+        {
+            "src": {
+                "new": true,
+                "verify": "",
+                "name": "vlan2",
+                "model": "",
+                "vnic": ""
+            },
+            "dest": {
+                "new": false,
+                "verify": "resource_name_exists",
+                "resource_type": "resource",
+                "name": "Domain-controller",
+                "model": "",
+                "vnic": ""
+            }
+        },
+        {
+            "src": {
+                "new": true,
+                "verify": "",
+                "name": "app3",
+                "model": "",
+                "vnic": "1"
+            },
+            "dest": {
+                "new": true,
+                "verify": "",
+                "name": "vlan2",
+                "model": "",
+                "vnic": ""
+            }
+        },
+        {
+            "src": {
+                "new": true,
+                "verify": "",
+                "name": "app3",
+                "model": "",
+                "vnic": "2"
+            },
+            "dest": {
+                "new": true,
+                "verify": "",
+                "name": "vlan3",
+                "model": "",
+                "vnic": ""
+            }
+        },
+        {
+            "src": {
+                "new": true,
+                "verify": "",
+                "name": "app3",
+                "model": "",
+                "vnic": "3"
+            },
+            "dest": {
+                "new": true,
+                "verify": "",
+                "name": "vlan4",
+                "model": "",
+                "vnic": ""
+            }
+        },
+        {
+            "src": {
+                "new": true,
+                "verify": "",
+                "name": "app3",
+                "model": "",
+                "vnic": "4"
+            },
+            "dest": {
+                "new": true,
+                "verify": "",
+                "name": "vlan5",
+                "model": "",
+                "vnic": ""
+            }
+        },
+        {
+            "src": {
+                "new": true,
+                "verify": "",
+                "name": "app4",
+                "model": "",
+                "vnic": "1"
+            },
+            "dest": {
+                "new": true,
+                "verify": "",
+                "name": "vlan2",
+                "model": "",
+                "vnic": ""
+            }
+        },
+        {
+            "src": {
+                "new": true,
+                "verify": "",
+                "name": "app4",
+                "model": "",
+                "vnic": "2"
+            },
+            "dest": {
+                "new": true,
+                "verify": "",
+                "name": "vlan3",
+                "model": "",
+                "vnic": ""
+            }
+        },
+        {
+            "src": {
+                "new": true,
+                "verify": "",
+                "name": "app4",
+                "model": "",
+                "vnic": "3"
+            },
+            "dest": {
+                "new": true,
+                "verify": "",
+                "name": "vlan4",
+                "model": "",
+                "vnic": ""
+            }
+        },
+        {
+            "src": {
+                "new": true,
+                "verify": "",
+                "name": "app4",
+                "model": "",
+                "vnic": "4"
+            },
+            "dest": {
+                "new": true,
+                "verify": "",
+                "name": "vlan5",
+                "model": "",
+                "vnic": ""
+            }
+        },
+        {
+            "src": {
+                "new": true,
+                "verify": "",
+                "name": "app5",
+                "model": "",
+                "vnic": "2"
+            },
+            "dest": {
+                "new": true,
+                "verify": "",
+                "name": "vlan4",
+                "model": "",
+                "vnic": ""
+            }
+        },
+        {
+            "src": {
+                "new": true,
+                "verify": "",
+                "name": "app6",
+                "model": "",
+                "vnic": "2"
+            },
+            "dest": {
+                "new": true,
+                "verify": "",
+                "name": "vlan5",
+                "model": "",
+                "vnic": ""
+            }
+        },
+        {
+            "src": {
+                "new": true,
+                "verify": "",
+                "name": "app5",
+                "model": "",
+                "vnic": "1"
+            },
+            "dest": {
+                "new": false,
+                "verify": "resource_name_exists",
+                "resource_type": "service",
+                "name": "Mgmt-Network",
+                "model": ""
+            }
+        },
+        {
+            "src": {
+                "new": true,
+                "verify": "",
+                "name": "app5",
+                "model": "",
+                "vnic": "9"
+            },
+            "dest": {
+                "new": false,
+                "verify": "resource_name_exists",
+                "resource_type": "service",
+                "name": "Egress-Network",
+                "model": ""
+            }
+        },
+        {
+            "src": {
+                "new": true,
+                "verify": "",
+                "name": "app6",
+                "model": "",
+                "vnic": "1"
+            },
+            "dest": {
+                "new": false,
+                "verify": "resource_name_exists",
+                "resource_type": "service",
+                "name": "Mgmt-Network",
+                "model": ""
+            }
+        }
+    ],
+    "layout": {
+        "start_resource": {
+            "verify": "exists_in_sandbox",
+            "resource_type": "service",
+            "name": "Mgmt-Network",
+            "model": ""
+        },
+        "x_offset": 360,
+        "y_offset": 0,
+        "x_gap": 320,
+        "y_gap": 80,
+        "resources": [],
+        "apps_services": [
+            {
+                "friendly_name": "app5",
+                "row": 0,
+                "col": 0
+            },
+            {
+                "friendly_name": "app6",
+                "row": 2,
+                "col": 0
+            },
+            {
+                "friendly_name": "vlan4",
+                "row": 0,
+                "col": 1
+            },
+            {
+                "friendly_name": "vlan5",
+                "row": 2,
+                "col": 1
+            },
+            {
+                "friendly_name": "app3",
+                "row": 0,
+                "col": 2
+            },
+            {
+                "friendly_name": "app4",
+                "row": 2,
+                "col": 2
+            },
+            {
+                "friendly_name": "vlan2",
+                "row": 0,
+                "col": 3
+            },
+            {
+                "friendly_name": "vlan3",
+                "row": 2,
+                "col": 3
+            },
+            {
+                "friendly_name": "app2",
+                "row": 1,
+                "col": 4
+            },
+            {
+                "friendly_name": "vlan1",
+                "row": 1,
+                "col": 5
+            },
+            {
+                "friendly_name": "app1",
+                "row": 1,
+                "col": 6
+            },
+            {
+                "friendly_name": "vlan6",
+                "row": 3,
+                "col": 4
+            }
+        ]
+    }
+}
